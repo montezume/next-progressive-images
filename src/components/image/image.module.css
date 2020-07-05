@@ -3,6 +3,7 @@
   height: 100%;
   position: absolute;
   top: 0;
+  object-fit: contain;
   left: 0;
 }
 

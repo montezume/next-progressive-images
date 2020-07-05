@@ -12,9 +12,11 @@ const headers = {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const page = req.query.page as string;
   const perPage = (req.query.per_page || 10) as string;
+  const cacheKey = JSON.stringify(req.query);
+  const query = req.query.query as string;
 
   try {
-    const cachedValue = cache.get(page);
+    const cachedValue = cache.get(cacheKey);
 
     if (cachedValue) {
       res.setHeader("USED-CACHE", "true");
@@ -22,14 +24,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const response = await fetch(
-      `https://api.unsplash.com/search/photos?query='portugal'&page=${page}&per_page=${perPage}`,
+      `https://api.unsplash.com/search/photos?query=${query}&page=${page}&per_page=${perPage}`,
       {
         headers
       }
     );
 
     const data = await response.json();
-    cache.set(page, JSON.stringify(data), 10000);
+    cache.set(cacheKey, JSON.stringify(data), 10000);
     res.setHeader("USED-CACHE", "false");
     return res.status(200).json(data);
   } catch (err) {

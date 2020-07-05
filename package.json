@@ -10,6 +10,7 @@
   "dependencies": {
     "@montezume/react-progressive-image": "^0.0.1-beta4",
     "@types/node-fetch": "^2.5.7",
+    "classnames": "^2.2.6",
     "next": "latest",
     "node-cache": "^5.1.2",
     "node-fetch": "^2.6.0",

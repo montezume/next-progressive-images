@@ -22,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const response = await fetch(
-      `https://api.unsplash.com/search/photos?query=cat&page=${page}&per_page=${perPage}`,
+      `https://api.unsplash.com/search/photos?query='portugal'&page=${page}&per_page=${perPage}`,
       {
         headers
       }

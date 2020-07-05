@@ -1,0 +1,23 @@
+.image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.thumb {
+  filter: blur(25px);
+}
+
+.full {
+  visibility: hidden;
+}
+
+.full.loaded {
+  visibility: visible;
+}
+
+.thumb.loaded {
+  visibility: hidden;
+}

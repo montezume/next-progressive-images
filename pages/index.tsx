@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useSWRInfinite } from "swr";
-import { Image } from "@montezume/react-progressive-image";
+// import { Image } from "@montezume/react-progressive-image";
+import { Image } from "../src/components/image";
 import { useIntersectionObserver } from "../src/hooks/useIntersectionObserver";
 import styles from "./index.module.css";
 
@@ -17,6 +18,7 @@ const ImagesPage = () => {
   );
 
   console.log(size);
+  console.log(data);
 
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
@@ -35,20 +37,22 @@ const ImagesPage = () => {
   });
 
   return (
-    <div className="grid grid-cols-2 gap-4 mt-4 max-w-5xl	m-auto">
+    <div className="grid grid-cols-1 gap-4 mt-4 max-w-4xl	m-auto">
       {data &&
         data.map(page => {
           return page.results.map((res: any) => {
             const aspectRatio = (res.height / res.width) * 100;
             return (
-              <div className="overflow-hidden" key={res.id}>
+              <div
+                className="overflow-hidden relative"
+                key={res.id}
+                style={{ paddingBottom: `${aspectRatio}%` }}
+              >
                 <Image
-                  key={res.id}
                   src={res.urls.regular}
-                  thumb={res.urls.thumb}
+                  thumb={res.urls.raw}
                   alt={res.alt_description}
                   className={styles.image}
-                  aspectRatio={aspectRatio}
                 />
               </div>
             );
@@ -59,3 +63,13 @@ const ImagesPage = () => {
   );
 };
 export default ImagesPage;
+
+/*                <Image
+                  key={res.id}
+                  src={res.urls.regular}
+                  thumb={res.urls.thumb}
+                  alt={res.alt_description}
+                  className={styles.image}
+                  aspectRatio={aspectRatio}
+                />
+*/
